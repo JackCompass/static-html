@@ -84,22 +84,46 @@
         .getElementById("open-app-link")
         .addEventListener("click", alertMobile);
 
-
       function alertMobile(isNotRedirecting = true) {
-        if (isMobile.iOS() && isNotRedirecting) {
-          window.location.replace(
-            "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8"
-          );
+        const browser = detectBrowser();
+        if (isMobile.iOS()) {
+          if (browser === "safari") {
+            window.location.href =
+              "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8";
+          }
+          if (browser === "chrome") {
+            window.location.href =
+              "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8";
+          }
         } else if (isMobile.Android()) {
-          window.location.replace(
-            "https://play.google.com/store/apps/details?id=com.harbor_delivery&hl=en"
-          );
+          window.location.href =
+            "https://play.google.com/store/apps/details?id=com.harbor_delivery&hl=en";
         } else if (isMobile.BlackBerry()) {
           alert("BlackBerry");
         } else if (isMobile.Opera()) {
           alert("Opera mobile browser");
         } else if (isMobile.Windows()) {
           alert("Windows mobile browser");
+        }
+      }
+
+      function detectBrowser() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        // Check if it's iOS (iPhone or iPad)
+        const isIOS = /iphone|ipad/.test(userAgent);
+        // Check if it's Safari
+        const isSafari =
+          userAgent.includes("safari") && !userAgent.includes("chrome");
+        // Check if it's Chrome
+        const isChrome = userAgent.includes("crios"); // 'CriOS' is the Chrome on iOS identifier
+        if (isIOS && isChrome) {
+          // If it's iOS and Chrome, show a message to open in Safari
+          return "chrome";
+        } else if (isIOS && isSafari) {
+          // If it's iOS and Safari, continue with the App Clip URL
+          return "safari";
+        } else {
+          return "other";
         }
       }
 
@@ -114,17 +138,6 @@
           return navigator.userAgent.match(/Linux/i);
         },
       };
-      const isBrowser = {
-        Firefox: function () {
-          return navigator.userAgent.match(/Firefox/i);
-        },
-        Chrome: function () {
-          return navigator.userAgent.match(/Chrome/i);
-        },
-        Safari: function () {
-          return navigator.userAgent.match(/Safari/i);
-        },
-      };
 
       function alertDesktop() {
         if (isDesktop.Macos()) {
@@ -135,16 +148,6 @@
         }
         if (isDesktop.Linux()) {
           alert("Linux");
-        }
-      }
-
-      function alertBrowser() {
-        if (isBrowser.Firefox()) {
-          alert("Firefox");
-        } else if (isBrowser.Chrome()) {
-          alert("Chrome");
-        } else if (isBrowser.Safari()) {
-          alert("Safari");
         }
       }
 
