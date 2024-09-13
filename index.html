@@ -13,6 +13,21 @@
   </head>
   <body>
     <h1 class="text-center">you will be redirected soon</h1>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <h3 style="margin-right: 8px; text-align: center">
+        If not getting automatically redirected
+      </h3>
+      <a href="https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8"
+        >Click here to open it</a
+      >
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -70,9 +85,9 @@
 
       function alertMobile() {
         if (isMobile.iOS()) {
-          window.location.replace(
-            "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8"
-          );
+          //window.location.replace(
+          //  "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8"
+          //);
         } else if (isMobile.Android()) {
           window.location.replace(
             "https://play.google.com/store/apps/details?id=com.harbor_delivery&hl=en"
