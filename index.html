@@ -32,7 +32,6 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      document.getElementById("open-app-link").addEventListener("click", alertMobile);
       // alert(navigator.userAgent);
       window.mobileAndTabletCheck = function () {
         let check = false;
@@ -86,7 +85,6 @@
         .getElementById("open-app-link")
         .addEventListener("click", openAppLink);
 
-      function openAppLink() {}
 
       function alertMobile() {
         if (isMobile.iOS()) {
