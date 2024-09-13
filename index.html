@@ -32,7 +32,6 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      document.getElementById("open-app-link").addEventListener("click", alertMobile);
       // alert(navigator.userAgent);
       window.mobileAndTabletCheck = function () {
         let check = false;
@@ -84,8 +83,56 @@
 
       const element = document
         .getElementById("open-app-link")
-        .addEventListener("click", openAppLink);
+        .addEventListener("click", alertMobile);
 
+      function detectBrowser() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        // Check if it's iOS (iPhone or iPad)
+        const isIOS = /iphone|ipad/.test(userAgent);
+        // Check if it's Safari
+        const isSafari =
+          userAgent.includes("safari") && !userAgent.includes("chrome");
+        // Check if it's Chrome
+        const isChrome = userAgent.includes("crios"); // 'CriOS' is the Chrome on iOS identifier
+        if (isIOS && isChrome) {
+          // If it's iOS and Chrome, show a message to open in Safari
+          return "chrome";
+        } else if (isIOS && isSafari) {
+          // If it's iOS and Safari, continue with the App Clip URL
+          return "safari";
+        } else {
+          return "other";
+        }
+      }
+
+      window.onload = function () {
+        const browser = detectBrowser();
+
+        if (browser === "chrome") {
+          // Show a message prompting users to open in Safari
+          document.body.innerHTML = `
+      <div style="text-align:center; padding:20px;">
+        <h2>Please open this link in Safari to view the App Clip.</h2>
+        <p>Tap the button below to open this page in Safari.</p>
+        <button onclick="openInSafari()">Open in Safari</button>
+      </div>
+    `;
+        } else if (browser === "safari") {
+          // Proceed to open the App Clip
+          window.location.href =
+            "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8";
+        } else {
+          // Handle other browsers (if necessary)
+          document.body.innerHTML = `
+      <h2>This App Clip is only supported on iOS devices with Safari.</h2>
+    `;
+        }
+      };
+
+      function openInSafari() {
+        window.location.href =
+          "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8";
+      }
 
       function alertMobile() {
         if (isMobile.iOS()) {
@@ -150,9 +197,9 @@
         }
       }
 
-      if (isCurrentdeviceIsMobile && mobileAndTabletCheck() && isMobile.any()) {
-        alertMobile();
-      }
+      // if (isCurrentdeviceIsMobile && mobileAndTabletCheck() && isMobile.any()) {
+      //   alertMobile();
+      // }
     </script>
   </body>
 </html>
