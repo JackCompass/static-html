@@ -32,8 +32,6 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      document.getElementById("open-app-link").addEventListener("click", alertMobile);
-      // alert(navigator.userAgent);
       window.mobileAndTabletCheck = function () {
         let check = false;
         (function (a) {
@@ -84,11 +82,11 @@
 
       const element = document
         .getElementById("open-app-link")
-        .addEventListener("click", openAppLink);
+        .addEventListener("click", alertMobile);
 
 
-      function alertMobile() {
-        if (isMobile.iOS()) {
+      function alertMobile(isNotRedirecting = true) {
+        if (isMobile.iOS() && isNotRedirecting) {
           window.location.replace(
             "https://appclip.apple.com/id?p=com.harborlockers.pilot.Clip&mt=8"
           );
@@ -151,7 +149,7 @@
       }
 
       if (isCurrentdeviceIsMobile && mobileAndTabletCheck() && isMobile.any()) {
-        alertMobile();
+        alertMobile(false);
       }
     </script>
   </body>
