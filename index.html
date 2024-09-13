@@ -147,7 +147,9 @@
       }
 
       if (isCurrentdeviceIsMobile && mobileAndTabletCheck() && isMobile.any()) {
-        alertMobile();
+        setTimeout(() => {
+          alertMobile();
+        }, 1000);
       }
 
       // alertDesktop()
